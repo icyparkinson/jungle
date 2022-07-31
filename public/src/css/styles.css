@@ -38,6 +38,11 @@
       background-color: rgb(20	25	32	);
   }
 
+  nav a{
+    text-decoration: none;
+    color: white;
+  }
+
   .mag{
       padding: 0px;
   }
