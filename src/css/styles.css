@@ -14,19 +14,32 @@
   
   html{
       font-size: 62.5%;
+      background-color: rgb(236, 236, 236);
   }
+
+
 
   nav{
     background-color: rgb(20	25	32	);
     color: white;
     height: 60px;
-    padding-top: 5px;
+    padding: 5px 0;
   }
+
+  nav ul{
+    background-color: rgb(20	25	32	);
+  }
+
   nav li{
       list-style: none;
       display: inline;
       font-size: 1.5rem;
       padding: 0 15px;
+      background-color: rgb(20	25	32	);
+  }
+
+  .mag{
+      padding: 0px;
   }
 
   .title{
@@ -37,11 +50,6 @@
 
   nav input{
       width: 50%;
-  }
-
-  
-  h1{
-      color: red;
   }
 
   .carousel{
@@ -58,21 +66,29 @@
   
   .container{
       display: flex;
-      border: 1px solid blue;
-      width: 80%;
+      /* border: 1px solid blue; */
+      width: 90%;
       height: 300px;
       margin: 0 auto;
   }
 
   .item{
       display: flex;
-      border: 1px solid green;
+      /* border: 1px solid green; */
+      background-color: white;
       width: 25%;
       height: 100%;
       text-align: center;
       font-size: 3rem;
       flex-direction: column-reverse;
+      margin: 0 20px;
       
+  }
+
+  .item a{
+    background-color: white;
+    text-decoration: none;
+    color: black;
   }
 
   .item_img{
