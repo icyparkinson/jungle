@@ -1,54 +1,78 @@
-const express = require("express")
-const app = express()
-const mongoose = require('mongoose')
-// const MongoClient = require("mongodb").MongoClient
-const { response } = require("express")
-const passport = require("passport")
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
-const flash = require('express-flash')
-const logger = require('morgan')
-const connectDB = require('./config/database')
-require ("dotenv").config()
-const PORT = 8000
-// const mainRoutes = require('./routes/main')
-// const animeRoutes = require('./routes/animes')
+// MODULES
+const express = require('express'); 
+const app = express(); 
+const MongoClient = require('mongodb').MongoClient; 
+const PORT = 4444; 
+require('dotenv').config(); 
 
-// Passport config
-require('./config/passport')(passport)
+let db, 
+  dbConnectionStr = process.env.DBStringJungle, 
+  dbName = 'jungle'; 
 
-connectDB()
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
+  (client) => {
+    console.log(`Connected to ${dbName} Database`); 
+  }
+);
 
-
-app.set("view engine", "ejs")
-app.use(express.static("public"))
-app.use(express.urlencoded({ extended: true}))
-app.use(express.json())
-app.use(logger('dev'))
+// MIDDLEWARE
+app.set('view engine', 'ejs'); 
+app.use(express.static('public')); 
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
 
 
+// ROUTES
+app.get('/', async (request, response) => {
+  const boughtItems = await db.collection('jungle').find().toArray(); 
+  const cartCount = await db 
+    .collection('jungle') 
+    .countDocuments(); 
+  response.render('index.ejs', { items: todoItems, count: cartCount }); 
+});
 
-// Sessions
-app.use(
-    session({
-        secret: 'keyboard cat',
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoStore({ mongooseConnection: mongoose.connection }),
+app.post('/addItem', (request, response) => {
+  db.collection('jungle')
+    .insertOne({ thing: request.body.boughtItem }) 
+    .then((result) => {
+      console.log('Item Added'); 
+      response.redirect('/'); 
     })
-)
-    
-// Passport middleware
-app.use(passport.initialize())
-app.use(passport.session())
+    .catch((error) => console.error(error));
+});
+
+app.put('/changeQty', (request, response) => {
+  db.collection('jungle') 
+    .updateOne(
+      { thing: request.body.itemFromJS },
+      {
+        $set: {
+          quantity: 1,
+        },
+      },
+      {
+        upsert: false
+      }
+    )
+    .then((result) => {
+      console.log('Changed qty'); 
+      response.json('Changed qty'); 
+    })
+    .catch((error) => console.error(error)); 
+});
 
 
-app.use(flash())
 
-app.use('/', mainRoutes)
-app.use('/items', itemRoutes)
+app.delete('/deleteItem', (request, response) => {
+  db.collection('jungle')
+    .deleteOne({ thing: request.body.itemFromJS }) 
+    .then((result) => {
+      console.log('Item Deleted'); 
+      response.json('Item Deleted'); 
+    })
+    .catch((error) => console.error(error)); 
+});
 
-
-app.listen(process.env.PORT || PORT, () =>{
-    console.log(`Server running on port ${PORT}`)
-})
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
