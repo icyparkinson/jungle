@@ -29,7 +29,11 @@
 
     <!-- Different categories of shopping-->
     <section class = "container">
-        <section class = "item"><a href="items/toy1.html">Toy</a><a href="items/toy1.html"><img class = "item_img" src = "src/css/images/toy1.jpg"></a></section>
+        <section class = "item"><a href="/toy1">
+            <% baloons.forEach(thing => { %>
+                <%= thing.itemName %>
+            <% }) %>
+        </a><a href="/toy1"><img class = "item_img" src = "src/css/images/toy1.jpg"></a></section>
         <section class = "item"><a href="items/watch1.html">Watch</a><a href="items/watch1.html"><img class = "item_img" src = "src/css/images/watch1.jpg"></a></section>
         <section class = "item"><a href="items/food1.html">Food</a><a href="items/food1.html"><img class = "item_img" src = "src/css/images/food1.jpg"></a></section>
         <section class = "item"><a href="items/clothes1.html">clothes</a><a href="items/clothes1.html"><img class = "item_img" src = "src/css/images/clothes1.jpg"></a></section>

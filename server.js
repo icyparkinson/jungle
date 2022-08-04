@@ -1,9 +1,17 @@
 // MODULES
 const express = require('express'); 
 const app = express(); 
+const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient; 
+const ejs = require ('ejs');
+const Items = require('./models/Items');
 const PORT = 4444; 
 require('dotenv').config(); 
+
+// const itemRoutes = require('./routes/items')
+
+
+
 
 let db, 
   dbConnectionStr = process.env.DBStringJungle, 
@@ -23,13 +31,49 @@ app.use(express.json());
 
 
 // ROUTES
-app.get('/', async (request, response) => {
-//   const boughtItems = await db.collection('jungle').find().toArray(); 
-//   const cartCount = await db 
-//     .collection('jungle') 
-//     .countDocuments(); 
-  response.render('index.ejs'); 
-});
+// app.use('/', itemRoutes)
+// app.get('/', async (request, response) => {
+//     let item = "Toy Story"
+// //   const boughtItems = await db.collection('jungle').find().toArray(); 
+// //   const cartCount = await db 
+// //     .collection('jungle') 
+// //     .countDocuments(); 
+//   response.render('index', {
+//     itemName: item
+//   }); 
+// });
+
+mongoose.connect('mongodb+srv://jungle:banananana@cluster0.cvvsy.mongodb.net/jungle?retryWrites=true&w=majority')
+
+const itemSchema = {
+  itemName: String,
+  itemPrice: String
+}
+
+const ItemsList = mongoose.model('item', itemSchema)
+
+
+app.get('/', async (req, res) =>{
+  // Items.find({}, function(err, items){
+  //   res.render('index', {
+  //     // itemsList: items
+  //   })
+
+  let clowns = await ItemsList.find()
+  console.log(clowns)
+
+
+  let name = "Icy"
+  res.render('index', {
+    userName: name,
+    baloons: clowns //What follows the colon is the actual database array. What precedes the colon is the variable used by EJS.
+  })
+  
+})
+
+app.get('/toy1', async (request, response) => {
+    response.render('items/toy1')
+})
 
 // app.post('/addItem', (request, response) => {
 //   db.collection('jungle')
