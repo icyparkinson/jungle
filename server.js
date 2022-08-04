@@ -43,7 +43,7 @@ app.use(express.json());
 //   }); 
 // });
 
-mongoose.connect('mongodb+srv://jungle:banananana@cluster0.cvvsy.mongodb.net/jungle?retryWrites=true&w=majority')
+mongoose.connect(dbConnectionStr)
 
 const itemSchema = {
   itemName: String,
