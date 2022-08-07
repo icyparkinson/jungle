@@ -67,10 +67,20 @@ const CartsList = mongoose.model('cart', cartSchema)
 
 app.get('/', async (req, res) =>{
   let clowns = await ItemsList.find()
-  let cart = await CartsList.countDocuments()
-  // console.log(cart)
+  // let cart = await CartsList.countDocuments() <-- turns out, I don't need this
+  let groupStage = { $group: { 
+    _id: null, 
+    total: { 
+        $sum: "$itemCount"
+    } 
+} 
+}
+  let cartCount = await CartsList.aggregate([groupStage]) //This aggregate function is from MongoDB and lets you sum everything up from one query type
+  let cartNum = (cartCount.map(a => a.total))[0] //have to use Map to get the number out of the object inside an array
+
   res.render('index', {
-    baloons: clowns //What follows the colon is the actual database array. What precedes the colon is the variable used by EJS.
+    baloons: clowns, //What follows the colon is the actual database array. What precedes the colon is the variable used by EJS.
+    shoppingCart: cartNum
   })
   
 })
