@@ -8,6 +8,7 @@
 
     <link rel = "stylesheet" href = "../src/css/styles.css">
     <link rel = "stylesheet" href = "../src/css/cart.css">
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
     <nav>
@@ -29,26 +30,35 @@
     <section class = "container">
     
         <section class = "cartSide">
+
+            <% let subtotal = 0 %>
     
     
-    <% for (let item of currentCart){ %>
-        <section class = "liContainer">
-            <section class = "imgSide">
-                <img src = "<%= item.itemPic %>" class = "cartImg">
-            </section>
-            <section class = "descSide">
-                <h2><%= item.itemName %></h2>
-            
-                <p>Quantity: <input type = "number" value = <%= item.itemCount %> >
-                    Price: <%= item.itemPrice %> each</p>
-                <button class = "upCart">Update Quantity</button>
-            </section>
+            <% for (let item of currentCart){ %>
+                <section class = "liContainer">
+                    <section class = "imgSide">
+                        <a href =" <%= item.itemPage %> "><img src = "<%= item.itemPic %>" class = "cartImg"></a>
+                    </section>
+                    <section class = "descSide">
+                        <h2><%= item.itemName %></h2>
+                    
+                        <p>Quantity: <input type = "number" value = <%= item.itemCount %> >
+                            <span class = "priceSpan">Price: <%= item.itemPrice %> each</span></p>
+                        <button class = "upCart">Update Quantity</button>
+                    </section>
+                </section>
+                <% subtotal += (item.itemCount * item.itemPrice) %>
+            <% } %> 
+
         </section>
-    <% } %> 
 
+        <section class = "checkoutSide">
+            <h3>Subtotal: $<%= subtotal %></h3>
 
-    
-    </section>
+            <button>Empty Cart</button>
+            <span class = "disclaimer">Disclaimer: There is no option to checkout</span>
+
+        </section>
    </section>
 
 

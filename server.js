@@ -63,6 +63,7 @@ const cartSchema = {
   itemCount: Decimal128,
   itemPrice: String,
   itemPic: String,
+  itemPage: String,
 }
 
 const CartsList = mongoose.model('cart', cartSchema)
@@ -192,7 +193,8 @@ app.post('/addItem', async (req, res) => {
       itemName: req.body.itemName, 
       itemPrice: req.body.itemPrice,
       itemCount: req.body.itemCount,
-      itemPic: req.body.itemPic
+      itemPic: req.body.itemPic,
+      itemPage: req.body.itemPage,
     
     })
     

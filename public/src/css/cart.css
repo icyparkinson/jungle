@@ -32,11 +32,19 @@ span{
     width: 100%;
 }
 
+.checkoutSide{
+    padding: 20px;
+}
+
 h1{
     font-size: 5rem;
 }
 
 h2{
+    font-size: 3rem;
+}
+
+h3{
     font-size: 3rem;
 }
 
@@ -53,4 +61,12 @@ button{
     width: 170px;
     margin-top: 15px;
     font-size: 2rem;
+}
+
+.priceSpan{
+    margin-left: 200px;
+}
+
+.disclaimer{
+    font-size: 1.5rem;
 }
