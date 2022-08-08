@@ -20,7 +20,7 @@ async function addCart(){
             })
         })
         console.log(item, price)
-        window.location.reload(true)
+        location.assign("/cart")
 
     }
     catch(err){
@@ -41,7 +41,7 @@ async function updateCart(){
             })
         })
         console.log(item, price)
-        window.location.reload(true)
+        location.assign("/cart")
 
     }
     catch(err){
