@@ -101,7 +101,8 @@ app.get('/toy1', async (req, res) => {
   let cartCount = await CartsList.aggregate([groupStage]) //This aggregate function is from MongoDB and lets you sum everything up from one query type
   let cartNum = (cartCount.map(a => a.total))[0] //have to use Map to get the number out of the object inside an array
 
-  let inCart = [0, 1] || (await CartsList.find({"itemName" : "Toy"}))
+  //When this doesn't find anything, it errors out since it becomes undefined. So we use a ternary here to catch this moment.
+  await CartsList.find({"itemName" : "Toy"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Toy"})
 
     res.render('items/toy1', {
       taxi: bears,
@@ -125,9 +126,7 @@ app.get('/watch1', async (req, res) => {
   let cartCount = await CartsList.aggregate([groupStage])
   let cartNum = (cartCount.map(a => a.total))[0]
 
-  let inCart = await CartsList.find({"itemName" : "Watch"})
-  console.log(inCart)
-
+  await CartsList.find({"itemName" : "Watch"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Watch"})
 
     res.render('items/watch1', {
       taxi: bears,
@@ -151,7 +150,7 @@ app.get('/food1', async (req, res) => {
   let cartCount = await CartsList.aggregate([groupStage]) 
   let cartNum = (cartCount.map(a => a.total))[0] 
 
-  let inCart = await CartsList.find({"itemName" : "Food"})
+  await CartsList.find({"itemName" : "Food"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Food"})
 
     res.render('items/food1', {
       taxi: bears,
@@ -175,7 +174,7 @@ app.get('/clothes1', async (req, res) => {
   let cartCount = await CartsList.aggregate([groupStage])
   let cartNum = (cartCount.map(a => a.total))[0] 
 
-  let inCart = await CartsList.find({"itemName" : "Clothes"})
+  await CartsList.find({"itemName" : "Clothes"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Clothes"})
 
     res.render('items/clothes1', {
       taxi: bears, 
@@ -195,7 +194,7 @@ app.post('/addItem', async (req, res) => {
     
     })
     
-    res.redirect("/items/toy1")
+    res.redirect("/cart")
 
   } catch(err){
     console.log(err)
@@ -212,7 +211,7 @@ app.put('/updateItem', async (req, res) => {
     
     })
     
-    res.redirect("/items/toy1")
+    res.redirect("/cart")
 
   } catch(err){
     console.log(err)
