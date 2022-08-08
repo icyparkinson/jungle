@@ -13,11 +13,11 @@
     <nav>
         <ul>
             <li class = "title">Jungle</li>
-            <li>Deliver to YOU</li>
+            <li>Deliver to <span class="destination">YOU</span></li>
             <li><input type = "text" id = "search" placeholder = "Search bar"></li>
             <!-- <li class = "mag"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="vertical-align: -0.125em;" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 -2 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></li> -->
             <li>Account</li>
-            <li>Shopping Cart ( 0 )</li>
+            <li>Shopping Cart ( <%= shoppingCart %> )</li>
         </ul>
     </nav>
     <span><a href = "/">< back</a></span>
@@ -34,7 +34,7 @@
         
         <section class = "description">
             <section class = "itemHead">
-                <h1><%= taxi[0].itemName %></h1>
+                <h1 id = "item"><%= taxi[0].itemName %></h1>
                 <h3 class = "listPrice">List Price: $<%= taxi[0].itemListPrice %></h2>
                 <h2 class = "dealPrice">Deal Price: $<%= taxi[0].itemDealPrice %></h2>
             </section>
@@ -56,8 +56,14 @@
 
             <p>FREE delivery overnight if you spend $25 on qualifying items.</p>
 
-            <input type ="number">
-            <button>Add to Cart</button>
+            <input id = "quantity" type ="number" placeholder = 0 min = 0 value = <%= cartItem[0].itemCount %>>
+
+            <button class = "<% if (cartItem.length === 0){ %> hidden <%} %>"><span class = "updateCart" >Update Cart</span></button>
+            <button class = "addToCart <% if (cartItem.length > 0){ %> hidden <%} %>">Add to Cart</button>
+
+           
+                
+
 
             <p>Return Policy: Nonrefundable</p>
 

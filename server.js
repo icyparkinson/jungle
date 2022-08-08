@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient; 
 const ejs = require ('ejs');
 const Items = require('./models/Items');
+const { response } = require('express');
+const { Decimal128 } = require('mongodb');
 const PORT = 4444; 
 require('dotenv').config(); 
 
@@ -47,8 +49,8 @@ mongoose.connect(dbConnectionStr)
 
 const itemSchema = {
   itemName: String,
-  itemListPrice: Number,
-  itemDealPrice: Number,
+  itemListPrice: String,
+  itemDealPrice: String,
   itemPage: String,
   itemPic: String,
   itemDesc: Array,
@@ -58,13 +60,13 @@ const ItemsList = mongoose.model('item', itemSchema)
 
 const cartSchema = {
   itemName: String,
-  itemCount: Number,
-  itemPrice: Number,
+  itemCount: Decimal128,
+  itemPrice: String,
 }
 
 const CartsList = mongoose.model('cart', cartSchema)
 
-
+//HOMEPAGE
 app.get('/', async (req, res) =>{
   let clowns = await ItemsList.find()
   // let cart = await CartsList.countDocuments() <-- turns out, I don't need this
@@ -85,34 +87,105 @@ app.get('/', async (req, res) =>{
   
 })
 
+//TOY PAGE
 app.get('/toy1', async (req, res) => {
   let bears = await ItemsList.find({"_id" : "62e726b7da400130d185a46b"})
+
+  let groupStage = { $group: { 
+    _id: null, 
+    total: { 
+        $sum: "$itemCount"
+    } 
+} 
+}
+  let cartCount = await CartsList.aggregate([groupStage]) //This aggregate function is from MongoDB and lets you sum everything up from one query type
+  let cartNum = (cartCount.map(a => a.total))[0] //have to use Map to get the number out of the object inside an array
+
+  let inCart = [0, 1] || (await CartsList.find({"itemName" : "Toy"}))
+
     res.render('items/toy1', {
-      taxi: bears
+      taxi: bears,
+      shoppingCart: cartNum,
+      cartItem: inCart
     })
 })
 
+
+//WATCH PAGE
 app.get('/watch1', async (req, res) => {
   let bears = await ItemsList.find({"_id" : "62ec4820d159dab74abf793a"})
+
+  let groupStage = { $group: { 
+    _id: null, 
+    total: { 
+        $sum: "$itemCount"
+    } 
+} 
+}
+  let cartCount = await CartsList.aggregate([groupStage])
+  let cartNum = (cartCount.map(a => a.total))[0]
+
+  let inCart = await CartsList.find({"itemName" : "Watch"})
+  console.log(inCart)
+
+
     res.render('items/watch1', {
-      taxi: bears
+      taxi: bears,
+      shoppingCart: cartNum,
+      cartItem: inCart
     })
 })
 
+
+//FOOD PAGE
 app.get('/food1', async (req, res) => {
   let bears = await ItemsList.find({"_id" : "62ec50a5d159dab74abf793b"})
+
+  let groupStage = { $group: { 
+    _id: null, 
+    total: { 
+        $sum: "$itemCount"
+    } 
+} 
+}
+  let cartCount = await CartsList.aggregate([groupStage]) 
+  let cartNum = (cartCount.map(a => a.total))[0] 
+
+  let inCart = await CartsList.find({"itemName" : "Food"})
+
     res.render('items/food1', {
-      taxi: bears
+      taxi: bears,
+      shoppingCart: cartNum,
+      cartItem: inCart
     })
 })
 
+
+//CLOTHES PAGE
 app.get('/clothes1', async (req, res) => {
   let bears = await ItemsList.find({"_id" : "62ec50eed159dab74abf793c"})
+
+  let groupStage = { $group: { 
+    _id: null, 
+    total: { 
+        $sum: "$itemCount"
+    } 
+} 
+}
+  let cartCount = await CartsList.aggregate([groupStage])
+  let cartNum = (cartCount.map(a => a.total))[0] 
+
+  let inCart = await CartsList.find({"itemName" : "Clothes"})
+
     res.render('items/clothes1', {
-      taxi: bears
+      taxi: bears, 
+      shoppingCart: cartNum,
+      cartItem: inCart
     })
 })
 
+
+//ADDING ITEM TO CART
 app.post('/addItem', async (req, res) => {
   try{
     await CartsList.create({
@@ -121,11 +194,54 @@ app.post('/addItem', async (req, res) => {
       itemCount: req.body.itemCount
     
     })
+    
     res.redirect("/items/toy1")
 
   } catch(err){
     console.log(err)
   }
+})
+
+//UPDATING ITEM IN CART
+app.put('/updateItem', async (req, res) => {
+  try{
+    await CartsList.updateOne({
+      itemName: req.body.itemName, 
+      itemPrice: req.body.itemPrice,
+      itemCount: req.body.itemCount
+    
+    })
+    
+    res.redirect("/items/toy1")
+
+  } catch(err){
+    console.log(err)
+  }
+})
+
+
+
+
+
+// SHOPPING CART PAGE
+app.get('/cart', async (req, res) => {
+  let cart = await CartsList.find()
+
+  let groupStage = { $group: { 
+    _id: null, 
+    total: { 
+        $sum: "$itemCount"
+    } 
+} 
+}
+  let cartCount = await CartsList.aggregate([groupStage]) //This aggregate function is from MongoDB and lets you sum everything up from one query type
+  let cartNum = (cartCount.map(a => a.total))[0] //have to use Map to get the number out of the object inside an array
+
+
+  res.render('cart', {
+    currentCart : cart,
+    shoppingCart: cartNum
+  })
 })
 
 // app.post('/addItem', (request, response) => {

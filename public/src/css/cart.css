@@ -1,13 +1,44 @@
-.cart{
-    width: 90%;
-    height: 400px;
+html{
     background-color: white;
+}
+
+.container{
+    border: 1px solid red;
+}
+
+.cartSide{
+    border: 1px solid blue;
+    width: 70%;
 }
 
 span{
     font-size: 2rem;
 }
 
+.liContainer{
+    border: 5px solid green;
+    display: flex;
+    width: 100%;
+}
+.imgSide{
+    border: 1px solid orange;
+    width: 30%; 
+}
+
+.descSide{
+    border: 1px solid purple;
+    margin-left: 40px;
+    font-size: 2rem;
+}
+
 h1{
     font-size: 5rem;
+}
+
+h2{
+    font-size: 3rem;
+}
+
+img{
+    width: 100%;
 }

@@ -2,6 +2,9 @@ let item = document.querySelector("#item").innerText
 let price = document.querySelector(".dealPrice").innerText.split("$")[1]
 
 document.querySelector(".addToCart").addEventListener("click", addCart)
+document.querySelector(".updateCart").addEventListener("click", updateCart)
+document.querySelector("trial").addEventListener("click", updateCart)
+
 
 
 async function addCart(){
@@ -13,14 +16,36 @@ async function addCart(){
             body: JSON.stringify({
                 "itemName" : item,
                 "itemCount" : quantity,
-                "itemPrice" : parseInt(price)
+                "itemPrice" : price
             })
         })
-        console.log(item, quantity)
+        console.log(item, price)
         window.location.reload(true)
 
     }
     catch(err){
         console.log(err)
     }
+}
+
+async function updateCart(){
+    let quantity = document.getElementById("quantity").value
+    try{
+        const res = await fetch ("/updateItem", {
+            method: "PUT",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "itemName" : item,
+                "itemCount" : quantity,
+                "itemPrice" : price
+            })
+        })
+        console.log(item, price)
+        window.location.reload(true)
+
+    }
+    catch(err){
+        console.log(err)
+    }
+    // console.log("clicked!")
 }

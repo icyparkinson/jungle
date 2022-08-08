@@ -88,3 +88,7 @@ button{
     margin: 40px auto;
     font-size: 2rem;
 }
+
+.hidden{
+    display: none;
+}
