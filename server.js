@@ -204,12 +204,14 @@ app.post('/addItem', async (req, res) => {
 //UPDATING ITEM IN CART
 app.put('/updateItem', async (req, res) => {
   try{
-    await CartsList.updateOne({
-      itemName: req.body.itemName, 
-      itemPrice: req.body.itemPrice,
-      itemCount: req.body.itemCount
-    
-    })
+    await CartsList.findOneAndUpdate(
+      { itemName: req.body.itemName }, 
+      { 
+        $set:{
+          "itemCount": req.body.itemQty
+        }
+      }
+      )
     
     res.redirect("/cart")
 

@@ -42,3 +42,12 @@ h2{
 img{
     width: 100%;
 }
+
+button{
+    display: block;
+    background-color: gold;
+    border-radius: 15px;
+    width: 170px;
+    margin: 40px auto;
+    font-size: 2rem;
+}
