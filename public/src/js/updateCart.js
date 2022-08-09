@@ -25,3 +25,32 @@ async function upCart(){
     
     
 }
+
+
+let allDelete = document.querySelectorAll(".delete")
+for (let del of allDelete){
+    del.addEventListener("click", deleteItem)
+}
+
+async function deleteItem(){
+
+    let itemName = this.parentNode.childNodes[1].innerText
+    let check = confirm("Are you sure you want to remove this item from your shopping cart?")
+    if (check == true){
+        try{
+            let res = await fetch("/deleteItem", {
+                method: "DELETE",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                "itemName" : itemName,
+                })
+            })
+
+
+        } catch(err){
+            console.log(err)
+        }
+    }
+    window.location.reload(true)
+
+}

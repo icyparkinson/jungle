@@ -18,7 +18,7 @@
             <li><input type = "text" id = "search" placeholder = "Search bar"></li>
             <!-- <li class = "mag"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="vertical-align: -0.125em;" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 -2 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></li> -->
             <li>Account</li>
-            <li><a href ="/cart">Shopping Cart ( <%= shoppingCart %> )</a></li>
+            <li><a href = "/cart">Shopping Cart ( <%= shoppingCart === undefined ? 0 : shoppingCart %> )</a></li>
         </ul>
     </nav>
     <span><a href = "/">< back</a></span>
@@ -42,18 +42,19 @@
                     <section class = "descSide">
                         <h2><%= item.itemName %></h2>
                     
-                        <p>Quantity: <input type = "number" value = <%= item.itemCount %> >
+                        <p>Quantity: <input type = "number" min = 0 value = <%= item.itemCount %> >
                             <span class = "priceSpan">Price: <%= item.itemPrice %> each</span></p>
                         <button class = "upCart">Update Quantity</button>
+                        <span class = "delete">Delete Item</span>
                     </section>
                 </section>
-                <% subtotal += (item.itemCount * item.itemPrice) %>
+                <% subtotal += (item.itemCount * item.itemPrice)%>
             <% } %> 
 
         </section>
 
         <section class = "checkoutSide">
-            <h3>Subtotal: $<%= subtotal %></h3>
+            <h3>Subtotal: $<%= (Math.floor(subtotal * 100) / 100).toFixed(2) %></h3> <!-- This math is done to help prevent rounding issue and keep 2 decimal places-->
 
             <button>Empty Cart</button>
             <span class = "disclaimer">Disclaimer: There is no option to checkout</span>

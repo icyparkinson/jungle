@@ -89,6 +89,11 @@ button{
     font-size: 2rem;
 }
 
+button:hover{
+    background-color: goldenrod;
+    cursor: pointer;
+}
+
 .hidden{
     display: none;
 }

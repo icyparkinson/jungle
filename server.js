@@ -224,6 +224,21 @@ app.put('/updateItem', async (req, res) => {
   }
 })
 
+// DELETING ITEM IN CART
+app.delete('/deleteItem', async(req, res) => {
+  try{
+    await CartsList.findOneAndDelete({
+      itemName: req.body.itemName
+    })
+    
+    res.redirect("/cart")
+
+  }catch(err){
+    console.log(err)
+  }
+
+})
+
 
 
 
@@ -247,7 +262,7 @@ app.get('/cart', async (req, res) => {
     currentCart : cart,
     shoppingCart: cartNum
   })
-  console.log(cart)
+  
 })
 
 // app.post('/addItem', (request, response) => {
