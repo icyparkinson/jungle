@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungle: Toy</title>
+
+    <link rel = "stylesheet" href = "../src/css/styles.css">
+    <link rel = "stylesheet" href = "../src/css/cart.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class = "title"><a href="/">Jungle</a></li>
+            <li>Deliver to YOU</li>
+            <li><input type = "text" id = "search" placeholder = "Search bar"></li>
+            <!-- <li class = "mag"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="vertical-align: -0.125em;" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 -2 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></li> -->
+            <li>Account</li>
+            <li><a href ="/cart">Shopping Cart ( <%= shoppingCart %> )</a></li>
+        </ul>
+    </nav>
+    <span><a href = "/">< back</a></span>
+
+
+   
+    <h1>Shopping Cart</h1>
+
+    <section class = "container">
+    
+        <section class = "cartSide">
+    <% 
+    let map = {}
+
+    for (let item of currentCart){ 
+        if (!map[item.itemName]){ 
+            map[item.itemName] = item.itemCount 
+        } else{ 
+            map[item.itemName] += item.itemCount 
+        } 
+    } 
+    %>
+
+    <% if (map["Toy"]){ %>
+        <section class = "liContainer">
+            <section class = "imgSide">
+                <img src = "src/css/images/toy1.jpg" class = "cartImg">
+            </section>
+            <section class = "descSide">
+                <h2>Toy</h2>
+            
+                Quantity: <input class = "toyQ" type = "number" value = <%= map["Toy"] %> />
+                Price: 
+                <button class = "upToyCart">Update Quantity</button>
+            </section>
+        </section>
+    <% } %>
+
+    <% if (map["Watch"]){ %>
+        <section class = "liContainer">
+            <section class = "imgSide">
+                <img src = "src/css/images/watch1.jpg" class = "cartImg">
+            </section>
+            <section class = "descSide">
+                <h2>Watch</h2>
+            
+                Quantity: <input class = "watchQ" type = "number" value = <%= map["Watch"] %> />
+                <button class = "upWatchCart">Update Quantity</button>
+
+            </section>
+        </section>
+    <% } %>
+
+    <% if (map["Food"]){ %>
+        <section class = "liContainer">
+            <section class = "imgSide">
+                <img src = "src/css/images/food1.jpg" class = "cartImg">
+            </section>
+            <section class = "descSide">
+                <h2>Food</h2>
+            
+                Quantity: <input class = "foodQ" type = "number" value = <%= map["Food"] %> />
+                <button class = "upFoodCart">Update Quantity</button>
+
+            </section>
+        </section>
+    <% } %>
+
+    <% if (map["Clothes"]){ %>
+        <section class = "liContainer">
+            <section class = "imgSide">
+                <img src = "src/css/images/clothes1.jpg" class = "cartImg">
+            </section>
+            <section class = "descSide">
+                <h2>Clothes</h2>
+            
+                Quantity: <input class = "clothesQ" type = "number" value = <%= map["Clothes"] %> />
+                <button class = "upClothesCart">Update Quantity</button>
+
+            </section>
+        </section>
+    <% } %>
+    
+    </section>
+   </section>
+
+
+    <script type = "text/javascript" src = "src/js/updateCart.js"> </script>
+
+</body>
+</html>

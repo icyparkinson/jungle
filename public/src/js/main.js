@@ -3,9 +3,9 @@ let price = document.querySelector(".dealPrice").innerText.split("$")[1]
 
 document.querySelector(".addToCart").addEventListener("click", addCart)
 document.querySelector(".updateCart").addEventListener("click", updateCart)
-// document.querySelector("trial").addEventListener("click", updateCart)
+let img = document.querySelector(".bigPic").src
 
-
+console.log()
 
 async function addCart(){
     let quantity = document.getElementById("quantity").value
@@ -16,7 +16,8 @@ async function addCart(){
             body: JSON.stringify({
                 "itemName" : item,
                 "itemCount" : quantity,
-                "itemPrice" : price
+                "itemPrice" : price,
+                "itemPic" : img
             })
         })
         console.log(item, price)
@@ -46,27 +47,4 @@ async function updateCart(){
         console.log(err)
     }
     console.log("clicked!")
-}
-
-async function updateCartAgain(){
-    // let quantity = this.parentNode
-    // console.log(quantity)
-    // try{
-    //     const res = await fetch ("/updateItem", {
-    //         method: "PUT",
-    //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify({
-    //             "itemName" : item,
-    //             "itemCount" : quantity,
-    //             "itemPrice" : price
-    //         })
-    //     })
-    //     console.log(item, price)
-    //     location.assign("/cart")
-
-    // }
-    // catch(err){
-    //     console.log(err)
-    // }
-    console.log("hi!")
 }

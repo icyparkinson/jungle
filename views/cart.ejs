@@ -29,76 +29,24 @@
     <section class = "container">
     
         <section class = "cartSide">
-    <% 
-    let map = {}
-
-    for (let item of currentCart){ 
-        if (!map[item.itemName]){ 
-            map[item.itemName] = item.itemCount 
-        } else{ 
-            map[item.itemName] += item.itemCount 
-        } 
-    } 
-    %>
-
-    <% if (map["Toy"]){ %>
+    
+    
+    <% for (let item of currentCart){ %>
         <section class = "liContainer">
             <section class = "imgSide">
-                <img src = "src/css/images/toy1.jpg" class = "cartImg">
+                <img src = "<%= item.itemPic %>" class = "cartImg">
             </section>
             <section class = "descSide">
-                <h2>Toy</h2>
+                <h2><%= item.itemName %></h2>
             
-                Quantity: <input class = "toyQ" type = "number" value = <%= map["Toy"] %> />
-                <button class = "upToyCart">Update Quantity</button>
+                <p>Quantity: <input type = "number" value = <%= item.itemCount %> >
+                    Price: <%= item.itemPrice %> each</p>
+                <button class = "upCart">Update Quantity</button>
             </section>
         </section>
-    <% } %>
+    <% } %> 
 
-    <% if (map["Watch"]){ %>
-        <section class = "liContainer">
-            <section class = "imgSide">
-                <img src = "src/css/images/watch1.jpg" class = "cartImg">
-            </section>
-            <section class = "descSide">
-                <h2>Watch</h2>
-            
-                Quantity: <input class = "watchQ" type = "number" value = <%= map["Watch"] %> />
-                <button class = "upWatchCart">Update Quantity</button>
 
-            </section>
-        </section>
-    <% } %>
-
-    <% if (map["Food"]){ %>
-        <section class = "liContainer">
-            <section class = "imgSide">
-                <img src = "src/css/images/food1.jpg" class = "cartImg">
-            </section>
-            <section class = "descSide">
-                <h2>Food</h2>
-            
-                Quantity: <input class = "foodQ" type = "number" value = <%= map["Food"] %> />
-                <button class = "upFoodCart">Update Quantity</button>
-
-            </section>
-        </section>
-    <% } %>
-
-    <% if (map["Clothes"]){ %>
-        <section class = "liContainer">
-            <section class = "imgSide">
-                <img src = "src/css/images/clothes1.jpg" class = "cartImg">
-            </section>
-            <section class = "descSide">
-                <h2>Clothes</h2>
-            
-                Quantity: <input class = "clothesQ" type = "number" value = <%= map["Clothes"] %> />
-                <button class = "upClothesCart">Update Quantity</button>
-
-            </section>
-        </section>
-    <% } %>
     
     </section>
    </section>
