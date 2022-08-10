@@ -90,3 +90,7 @@ button:hover{
 .disclaimer{
     font-size: 1.5rem;
 }
+
+.hidden{
+    display: none;
+}

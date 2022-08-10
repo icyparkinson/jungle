@@ -29,11 +29,14 @@
 
     <section class = "container">
     
-        <section class = "cartSide">
+        
 
             <% let subtotal = 0 %>
-    
-    
+
+            <% if (currentCart.length === 0){ %>
+                <h2>Your shopping cart is empty</h2>
+            <% } else{ %>
+                <section class = "cartSide">
             <% for (let item of currentCart){ %>
                 <section class = "liContainer">
                     <section class = "imgSide">
@@ -54,12 +57,16 @@
         </section>
 
         <section class = "checkoutSide">
-            <h3>Subtotal: $<%= (Math.floor(subtotal * 100) / 100).toFixed(2) %></h3> <!-- This math is done to help prevent rounding issue and keep 2 decimal places-->
+            <h3>Subtotal (<%= shoppingCart === undefined ? 0 : shoppingCart %> items): $<%= (Math.floor(subtotal * 100) / 100).toFixed(2) %></h3> <!-- This math is done to help prevent rounding issue and keep 2 decimal places-->
 
             <button>Empty Cart</button>
             <span class = "disclaimer">Disclaimer: There is no option to checkout</span>
 
         </section>
+
+            <% } %>
+    
+        
    </section>
 
 
