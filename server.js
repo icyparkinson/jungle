@@ -15,15 +15,14 @@ require('dotenv').config();
 
 
 
-let db, 
-  dbConnectionStr = process.env.DBStringJungle, 
-  dbName = 'jungle'; 
+// let db, 
+//   dbName = 'jungle'; 
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
-  (client) => {
-    console.log(`Connected to ${dbName} Database`); 
-  }
-);
+// MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
+//   (client) => {
+//     console.log(`Connected to ${dbName} Database`); 
+//   }
+// );
 
 // MIDDLEWARE
 app.set('view engine', 'ejs'); 
@@ -45,6 +44,7 @@ app.use(express.json());
 //   }); 
 // });
 
+dbConnectionStr = process.env.DBStringJungle, 
 mongoose.connect(dbConnectionStr)
 
 const itemSchema = {
@@ -239,6 +239,21 @@ app.delete('/deleteItem', async(req, res) => {
 
 })
 
+// EMPTYING CART
+app.delete('/emptyCart', async(req, res) => {
+  try{
+    await CartsList.deleteMany({
+      //empty filter here will catch everything
+    })
+    
+    res.redirect("/cart")
+
+  }catch(err){
+    console.log(err)
+  }
+
+})
+
 
 
 
@@ -264,48 +279,6 @@ app.get('/cart', async (req, res) => {
   })
   
 })
-
-// app.post('/addItem', (request, response) => {
-//   db.collection('jungle')
-//     .insertOne({ thing: request.body.boughtItem }) 
-//     .then((result) => {
-//       console.log('Item Added'); 
-//       response.redirect('/'); 
-//     })
-//     .catch((error) => console.error(error));
-// });
-
-// app.put('/changeQty', (request, response) => {
-//   db.collection('jungle') 
-//     .updateOne(
-//       { thing: request.body.itemFromJS },
-//       {
-//         $set: {
-//           quantity: 1,
-//         },
-//       },
-//       {
-//         upsert: false
-//       }
-//     )
-//     .then((result) => {
-//       console.log('Changed qty'); 
-//       response.json('Changed qty'); 
-//     })
-//     .catch((error) => console.error(error)); 
-// });
-
-
-
-// app.delete('/deleteItem', (request, response) => {
-//   db.collection('jungle')
-//     .deleteOne({ thing: request.body.itemFromJS }) 
-//     .then((result) => {
-//       console.log('Item Deleted'); 
-//       response.json('Item Deleted'); 
-//     })
-//     .catch((error) => console.error(error)); 
-// });
 
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server running on port ${PORT}`);

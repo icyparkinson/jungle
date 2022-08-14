@@ -59,7 +59,7 @@
         <section class = "checkoutSide">
             <h3>Subtotal (<%= shoppingCart === undefined ? 0 : shoppingCart %> items): $<%= (Math.floor(subtotal * 100) / 100).toFixed(2) %></h3> <!-- This math is done to help prevent rounding issue and keep 2 decimal places-->
 
-            <button>Empty Cart</button>
+            <button class = "emptyCart">Empty Cart</button>
             <span class = "disclaimer">Disclaimer: There is no option to checkout</span>
 
         </section>
