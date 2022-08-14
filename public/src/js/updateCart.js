@@ -57,7 +57,7 @@ async function deleteItem(){
 document.querySelector(".emptyCart").addEventListener("click", deleteAllItems)
 
 async function deleteAllItems(){
-
+    console.log("delete all items")
     let itemName = this.parentNode.childNodes[1].innerText
     let check = confirm("Are you sure you want to empty your shopping cart?")
     if (check == true){
