@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungle: <%= item.itemName %></title>
+
+    <link rel = "stylesheet" href = "../src/css/styles.css">
+    <link rel = "stylesheet" href = "../src/css/items.css">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class = "title"><a href="/">Jungle</a></li>
+            <li>Deliver to <span class="destination">YOU</span></li>
+            <li><input type = "text" id = "search" placeholder = "Search bar"></li>
+            <!-- <li class = "mag"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="vertical-align: -0.125em;" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 -2 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></li> -->
+            <li>Account</li>
+            <li><a href = "/cart">Shopping Cart ( <%= shoppingCart === undefined ? 0 : shoppingCart %> )</a></li>
+        </ul>
+    </nav>
+    <span><a href = "/">< back</a></span>
+
+
+    <section class = "order">
+        <!-- This is the image section-->
+        <section class = "picture">
+            <img src = "../<%= item.itemPic %>" class = "bigPic">
+        </section>
+
+
+        <!-- This is the product description section-->
+        
+        <section class = "description">
+            <section class = "itemHead">
+                <h1 id = "item"><%= item.itemName %></h1>
+                <h3 class = "listPrice">List Price: $<%= item.itemListPrice %></h2>
+                <h2 class = "dealPrice">Deal Price: $<%= item.itemDealPrice %></h2>
+            </section>
+            <section class = "itemBody">
+                <h4>About this item:</h4>
+                <ul>
+                    <% for (let desc of item.itemDesc){%>
+                        <li><%= desc %></li>
+                    <% } %>
+                </ul>
+            </section>
+        </section>
+
+
+        <!-- This is the ordering section-->
+        <section class = "purchase">
+            <h4 class = dealPrice>$<%= item.itemDealPrice %></h4>
+            <p>Overnight Shipping</p>
+
+            <p>FREE delivery overnight if you spend $25 on qualifying items.</p>
+
+            <input id = "quantity" type ="number" placeholder = 0 min = 0 value = <%= cartItem.length > 0 ? cartItem[0].itemCount : 0 %>>
+
+            <button class = "<% if (cartItem.length === 0){ %> hidden <%} %>"><span class = "updateCart" >Update Cart</span></button>
+            <button class = "addToCart <% if (cartItem.length > 0){ %> hidden <%} %>">Add to Cart</button>
+
+
+            <p>Return Policy: Nonrefundable</p>
+
+        </section>
+    </section>
+    <script type = "text/javascript" src = "../src/js/main.js"> </script>
+</body>
+</html>

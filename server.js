@@ -89,10 +89,10 @@ app.get('/', async (req, res) =>{
   
 })
 
-
-//TOY PAGE
-app.get('/toy1', async (req, res) => {
-  let bears = await ItemsList.find({"_id" : "62e726b7da400130d185a46b"})
+//ANY ITEM PAGE
+app.get('/items/:id', async (req, res) =>{
+  let id = req.params.id
+  let foundItem = await ItemsList.findById(id)
 
   let groupStage = { $group: { 
     _id: null, 
@@ -101,91 +101,20 @@ app.get('/toy1', async (req, res) => {
     } 
 } 
 }
-  let cartCount = await CartsList.aggregate([groupStage]) //This aggregate function is from MongoDB and lets you sum everything up from one query type
+
+let cartCount = await CartsList.aggregate([groupStage]) //This aggregate function is from MongoDB and lets you sum everything up from one query type
   let cartNum = (cartCount.map(a => a.total))[0] //have to use Map to get the number out of the object inside an array
 
-  //When this doesn't find anything, it errors out since it becomes undefined. So we use a ternary here to catch this moment.
-  await CartsList.find({"itemName" : "Toy"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Toy"})
+  await CartsList.find({"itemName" : foundItem.itemName}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : foundItem.itemName})
+  
+  res.render('items/items', {
+    item: foundItem,
+    shoppingCart: cartNum,
+    cartItem: inCart
+  })
 
-    res.render('items/toy1', {
-      taxi: bears,
-      shoppingCart: cartNum,
-      cartItem: inCart
-    })
+
 })
-
-
-//WATCH PAGE
-app.get('/watch1', async (req, res) => {
-  let bears = await ItemsList.find({"_id" : "62ec4820d159dab74abf793a"})
-
-  let groupStage = { $group: { 
-    _id: null, 
-    total: { 
-        $sum: "$itemCount"
-    } 
-} 
-}
-  let cartCount = await CartsList.aggregate([groupStage])
-  let cartNum = (cartCount.map(a => a.total))[0]
-
-  await CartsList.find({"itemName" : "Watch"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Watch"})
-
-    res.render('items/watch1', {
-      taxi: bears,
-      shoppingCart: cartNum,
-      cartItem: inCart
-    })
-})
-
-
-//FOOD PAGE
-app.get('/food1', async (req, res) => {
-  let bears = await ItemsList.find({"_id" : "62ec50a5d159dab74abf793b"})
-
-  let groupStage = { $group: { 
-    _id: null, 
-    total: { 
-        $sum: "$itemCount"
-    } 
-} 
-}
-  let cartCount = await CartsList.aggregate([groupStage]) 
-  let cartNum = (cartCount.map(a => a.total))[0] 
-
-  await CartsList.find({"itemName" : "Food"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Food"})
-
-    res.render('items/food1', {
-      taxi: bears,
-      shoppingCart: cartNum,
-      cartItem: inCart
-    })
-})
-
-
-//CLOTHES PAGE
-app.get('/clothes1', async (req, res) => {
-  let bears = await ItemsList.find({"_id" : "62ec50eed159dab74abf793c"})
-
-  let groupStage = { $group: { 
-    _id: null, 
-    total: { 
-        $sum: "$itemCount"
-    } 
-} 
-}
-  let cartCount = await CartsList.aggregate([groupStage])
-  let cartNum = (cartCount.map(a => a.total))[0] 
-
-  await CartsList.find({"itemName" : "Clothes"}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : "Clothes"})
-
-    res.render('items/clothes1', {
-      taxi: bears, 
-      shoppingCart: cartNum,
-      cartItem: inCart
-    })
-})
-
 
 // NOT FOUND PAGE
 app.get('/nothing', async (req, res) => {
