@@ -4,25 +4,13 @@ const app = express();
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient; 
 const ejs = require ('ejs');
-const Items = require('./models/Items');
+const ItemsList = require('./models/ItemsList');
+const CartsList = require('./models/CartsList');
 const { response } = require('express');
 const { Decimal128 } = require('mongodb');
 const PORT = 4444; 
 require('dotenv').config(); 
 
-// const itemRoutes = require('./routes/items')
-
-
-
-
-// let db, 
-//   dbName = 'jungle'; 
-
-// MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
-//   (client) => {
-//     console.log(`Connected to ${dbName} Database`); 
-//   }
-// );
 
 // MIDDLEWARE
 app.set('view engine', 'ejs'); 
@@ -30,43 +18,17 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json());
 
-
-// ROUTES
-// app.use('/', itemRoutes)
-// app.get('/', async (request, response) => {
-//     let item = "Toy Story"
-// //   const boughtItems = await db.collection('jungle').find().toArray(); 
-// //   const cartCount = await db 
-// //     .collection('jungle') 
-// //     .countDocuments(); 
-//   response.render('index', {
-//     itemName: item
-//   }); 
-// });
-
+//CONNECT TO MONGODB
 dbConnectionStr = process.env.DBStringJungle, 
-mongoose.connect(dbConnectionStr)
+mongoose.connect(dbConnectionStr, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(
+  (client) => {
+    console.log(`Connected to Database`); 
+  }
+);
 
-const itemSchema = {
-  itemName: String,
-  itemListPrice: String,
-  itemDealPrice: String,
-  itemPage: String,
-  itemPic: String,
-  itemDesc: Array,
-}
-
-const ItemsList = mongoose.model('item', itemSchema)
-
-const cartSchema = {
-  itemName: String,
-  itemCount: Decimal128,
-  itemPrice: String,
-  itemPic: String,
-  itemPage: String,
-}
-
-const CartsList = mongoose.model('cart', cartSchema)
 
 //HOMEPAGE
 app.get('/', async (req, res) =>{
