@@ -89,6 +89,7 @@ app.get('/', async (req, res) =>{
   
 })
 
+
 //TOY PAGE
 app.get('/toy1', async (req, res) => {
   let bears = await ItemsList.find({"_id" : "62e726b7da400130d185a46b"})
@@ -182,6 +183,26 @@ app.get('/clothes1', async (req, res) => {
       taxi: bears, 
       shoppingCart: cartNum,
       cartItem: inCart
+    })
+})
+
+
+//NOT FOUND PAGE
+app.get('/notFound', async (req, res) => {
+
+  let groupStage = { $group: { 
+    _id: null, 
+    total: { 
+        $sum: "$itemCount"
+    } 
+} 
+}
+  let cartCount = await CartsList.aggregate([groupStage])
+  let cartNum = (cartCount.map(a => a.total))[0] 
+
+
+    res.render('items/notFound', {
+      shoppingCart: cartNum
     })
 })
 

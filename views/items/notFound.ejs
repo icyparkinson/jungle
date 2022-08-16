@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jungle</title>
+    <title>Jungle: <%= taxi[0].itemName %></title>
 
-    <link rel = "stylesheet" href = "src/css/styles.css">
+    <link rel = "stylesheet" href = "../src/css/styles.css">
+    <link rel = "stylesheet" href = "../src/css/items.css">
     <link rel="shortcut icon" href="#">
 </head>
 <body>
@@ -14,38 +15,21 @@
         <ul>
             <li class = "title"><a href="/">Jungle</a></li>
             <li>Deliver to <span class="destination">YOU</span></li>
-            <li>
-                <input type = "text" class = "search" placeholder = "Search bar" list = "itemList"><button class="searchBtn">Enter</button>
-                <datalist id = "itemList">
-                    <option>Toy</option>
-                    <option>Watch</option>
-                    <option>Food</option>
-                    <option>Clothes</option>
-                </datalist>
-            </li>
+            <li><input type = "text" id = "search" placeholder = "Search bar"></li>
             <!-- <li class = "mag"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="vertical-align: -0.125em;" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 -2 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></li> -->
             <li>Account</li>
             <li><a href = "/cart">Shopping Cart ( <%= shoppingCart === undefined ? 0 : shoppingCart %> )</a></li>
         </ul>
     </nav>
+    <span><a href = "/">< back</a></span>
 
-    <!--Carousel here-->
-    <section class = "carousel">
 
+    <section class = "nothing">
+        <h1>The item you searched for cannot be found.</h1>
+      
 
     </section>
 
-
-    <!-- Different categories of shopping-->
-    <section class = "container">
-        <% baloons.forEach(thing => { %>
-        <section class = "item"><a href="<%= thing.itemPage %>">
-            
-                <%= thing.itemName %>
-        </a><a href="<%= thing.itemPage %>"><img class = "item_img" src = "<%= thing.itemPic %>"></a></section>
-        <% }) %>
-    </section>
-    
 
     <script type = "text/javascript" src = "src/js/main.js"> </script>
 </body>

@@ -43,6 +43,10 @@
     color: white;
   }
 
+  form{
+    display: inline;
+  }
+
   .mag{
       padding: 0px;
   }

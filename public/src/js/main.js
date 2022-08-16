@@ -1,5 +1,7 @@
 //Put everything inside an if statement for the existence of item in the DOM so it doesn't error on the homepage
 
+
+
 if (document.querySelector("#item")){
 
     let item = document.querySelector("#item").innerText
@@ -57,3 +59,35 @@ if (document.querySelector("#item")){
 
 }
     
+//SEARCHBAR FUNCTION
+let searchBtn = document.querySelector(".searchBtn")
+let searchBar = document.querySelector(".search")
+let dest = ""
+
+searchBtn.addEventListener("click", openPage)
+
+
+function openPage(){
+    let searchVal = searchBar.value.toLowerCase()
+    switch (searchVal){
+        case "toy" : 
+            dest = "/toy1"
+            break
+        case "watch" :
+            dest = "/watch1"
+            break
+        case "food" : 
+            dest = "/food1"
+            break
+        case "clothes" : 
+            dest = "/clothes1"
+            break
+    }
+    if (dest.length >0){
+        window.location.assign(dest)
+    }else{
+        window.location.assign("/notFound")
+    }
+    
+
+}
