@@ -73,16 +73,16 @@ searchBar.addEventListener("keyup", e => {
         let content = searchBar.value
         switch (content){
             case "toy" : 
-                dest = "/toy1"
+                dest = "items/62e726b7da400130d185a46b"
                 break
             case "watch" :
-                dest = "/watch1"
+                dest = "items/62ec4820d159dab74abf793a"
                 break
             case "food" : 
-                dest = "/food1"
+                dest = "items/62ec50a5d159dab74abf793b"
                 break
             case "clothes" : 
-                dest = "/clothes1"
+                dest = "items/62ec50eed159dab74abf793c"
                 break
         }
         if (dest.length >0){
