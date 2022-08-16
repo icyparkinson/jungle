@@ -1,7 +1,6 @@
 //Put everything inside an if statement for the existence of item in the DOM so it doesn't error on the homepage
 
 
-
 if (document.querySelector("#item")){
 
     let item = document.querySelector("#item").innerText
@@ -64,30 +63,63 @@ let searchBtn = document.querySelector(".searchBtn")
 let searchBar = document.querySelector(".search")
 let dest = ""
 
-searchBtn.addEventListener("click", openPage)
-
-
-function openPage(){
-    let searchVal = searchBar.value.toLowerCase()
-    switch (searchVal){
-        case "toy" : 
-            dest = "/toy1"
-            break
-        case "watch" :
-            dest = "/watch1"
-            break
-        case "food" : 
-            dest = "/food1"
-            break
-        case "clothes" : 
-            dest = "/clothes1"
-            break
+window.onload = function() {
+    searchBar.value = '';
     }
-    if (dest.length >0){
-        window.location.assign(dest)
-    }else{
-        window.location.assign("/nothing")
-    }
-    
 
-}
+
+searchBar.addEventListener("keyup", e => {
+    e.preventDefault()
+    if (e.key === 'Enter'){
+        let content = searchBar.value
+        switch (content){
+            case "toy" : 
+                dest = "/toy1"
+                break
+            case "watch" :
+                dest = "/watch1"
+                break
+            case "food" : 
+                dest = "/food1"
+                break
+            case "clothes" : 
+                dest = "/clothes1"
+                break
+        }
+        if (dest.length >0){
+            window.location.assign(dest)
+            dest = ""  //Need this line to reset dest so that when you return to this page, a new search can be done
+        }else{
+            window.location.assign("/nothing")
+            dest=""
+        }
+    } 
+})
+
+
+
+// searchBtn.addEventListener("click", openPage)
+
+
+// function openPage(){
+//     let searchVal = searchBar.value.toLowerCase()
+    // switch (searchVal){
+    //     case "toy" : 
+    //         dest = "/toy1"
+    //         break
+    //     case "watch" :
+    //         dest = "/watch1"
+    //         break
+    //     case "food" : 
+    //         dest = "/food1"
+    //         break
+    //     case "clothes" : 
+    //         dest = "/clothes1"
+    //         break
+    // }
+    // if (dest.length >0){
+    //     window.location.assign(dest)
+    // }else{
+    //     window.location.assign("/nothing")
+    // }
+// }
