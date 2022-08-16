@@ -62,13 +62,21 @@ if (document.querySelector("#item")){
 let searchBtn = document.querySelector(".searchBtn")
 let searchBar = document.querySelector(".search")
 let dest = ""
-let mag = document.querySelector(".mag")
+let mag = document.querySelector("svg")
 
 window.onload = function() {
     searchBar.value = '';
     }
 
-searchBar.addEventListener("keyup", e => {
+searchBar.addEventListener("keyup", loadPage)
+mag.addEventListener("click", loadPage)
+
+function something(){
+    console.log("hi")
+}
+
+
+function loadPage(e){
     e.preventDefault()
     if (e.key === 'Enter'){
         let content = searchBar.value.toLowerCase()
@@ -94,7 +102,7 @@ searchBar.addEventListener("keyup", e => {
             dest=""
         }
     } 
-})
+}
 
 
 
