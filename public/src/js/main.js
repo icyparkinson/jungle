@@ -67,7 +67,6 @@ window.onload = function() {
     searchBar.value = '';
     }
 
-
 searchBar.addEventListener("keyup", e => {
     e.preventDefault()
     if (e.key === 'Enter'){
