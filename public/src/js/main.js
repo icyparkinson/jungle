@@ -59,7 +59,7 @@ if (document.querySelector("#item")){
 
 }
     
-//SEARCHBAR FUNCTION
+// SEARCHBAR FUNCTION
 let searchBtn = document.querySelector(".searchBtn")
 let searchBar = document.querySelector(".search")
 let dest = ""
@@ -86,7 +86,7 @@ function openPage(){
     if (dest.length >0){
         window.location.assign(dest)
     }else{
-        window.location.assign("/notFound")
+        window.location.assign("/nothing")
     }
     
 

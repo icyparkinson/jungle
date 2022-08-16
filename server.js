@@ -187,8 +187,8 @@ app.get('/clothes1', async (req, res) => {
 })
 
 
-//NOT FOUND PAGE
-app.get('/notFound', async (req, res) => {
+// NOT FOUND PAGE
+app.get('/nothing', async (req, res) => {
 
   let groupStage = { $group: { 
     _id: null, 
@@ -201,7 +201,7 @@ app.get('/notFound', async (req, res) => {
   let cartNum = (cartCount.map(a => a.total))[0] 
 
 
-    res.render('items/notFound', {
+    res.render('items/nothing', {
       shoppingCart: cartNum
     })
 })
