@@ -39,7 +39,7 @@
     <!-- Different categories of shopping-->
     <section class = "container">
         <% baloons.forEach(thing => { %>
-        <section class = "item"><a href="/items/<%= thing._id %>">
+        <section class = "item"><a href="<%= thing.itemPage %>">
             
                 <%= thing.itemName %>
         </a>
