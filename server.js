@@ -107,7 +107,7 @@ let cartCount = await CartsList.aggregate([groupStage]) //This aggregate functio
 
   await CartsList.find({"itemName" : foundItem.itemName}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : foundItem.itemName})
   
-  res.render('items/items', {
+  res.render('items', {
     item: foundItem,
     shoppingCart: cartNum,
     cartItem: inCart
@@ -130,7 +130,7 @@ app.get('/nothing', async (req, res) => {
   let cartNum = (cartCount.map(a => a.total))[0] 
 
 
-    res.render('items/nothing', {
+    res.render('nothing', {
       shoppingCart: cartNum
     })
 })

@@ -62,6 +62,7 @@ if (document.querySelector("#item")){
 let searchBtn = document.querySelector(".searchBtn")
 let searchBar = document.querySelector(".search")
 let dest = ""
+let mag = document.querySelector(".mag")
 
 window.onload = function() {
     searchBar.value = '';
@@ -70,23 +71,23 @@ window.onload = function() {
 searchBar.addEventListener("keyup", e => {
     e.preventDefault()
     if (e.key === 'Enter'){
-        let content = searchBar.value
+        let content = searchBar.value.toLowerCase()
         switch (content){
             case "toy" : 
-                dest = "items/62e726b7da400130d185a46b"
+                dest = "62e726b7da400130d185a46b"
                 break
             case "watch" :
-                dest = "items/62ec4820d159dab74abf793a"
+                dest = "62ec4820d159dab74abf793a"
                 break
             case "food" : 
-                dest = "items/62ec50a5d159dab74abf793b"
+                dest = "62ec50a5d159dab74abf793b"
                 break
             case "clothes" : 
-                dest = "items/62ec50eed159dab74abf793c"
+                dest = "62ec50eed159dab74abf793c"
                 break
         }
         if (dest.length >0){
-            window.location.assign(dest)
+            window.location.assign(`/items/${dest}`)
             dest = ""  //Need this line to reset dest so that when you return to this page, a new search can be done
         }else{
             window.location.assign("/nothing")
