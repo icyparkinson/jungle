@@ -27,6 +27,8 @@ mongoose.connect(dbConnectionStr, {
   }
 );
 
+
+//ROUTES
 app.use(itemRoutes)
 app.use(mainRoutes)
 
