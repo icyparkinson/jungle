@@ -86,21 +86,42 @@ if (document.querySelector("#item")){
     async function updateCart(){
         let quantity = document.getElementById("quantity").value
         if (startQty !== quantity){
-            try{
-                const res = await fetch ("/updateItem", {
-                    method: "PUT",
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        "itemName" : item,
-                        "itemQty" : quantity
+            if (quantity === "0"){
+                let check = confirm("Are you sure you want to remove this item from your shopping cart?")
+                if (check == true){
+                    try{
+                        let res = await fetch("/deleteItem", {
+                            method: "DELETE",
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                            "itemName" : item,
+                            })
+                        })
+        
+        
+                    } catch(err){
+                        console.log(err)
+                    }
+                }
+                window.location.reload(true)
+            }else{
+                try{
+                    const res = await fetch ("/updateItem", {
+                        method: "PUT",
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            "itemName" : item,
+                            "itemQty" : quantity
+                        })
                     })
-                })
-                location.assign("/cart")
-    
+                    location.assign("/cart")
+        
+                }
+                catch(err){
+                    console.log(err)
+                }
             }
-            catch(err){
-                console.log(err)
-            }
+           
             console.log("clicked!")
         }
     }
@@ -123,20 +144,42 @@ if (document.querySelectorAll(".upCart")){
         let quantity = this.parentNode.childNodes[3].firstElementChild.value
 
         if (startQty !== quantity){
-            try{
-                const res = await fetch ("/updateItem", {
-                    method: "PUT",
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        "itemName" : itemName,
-                        "itemQty" : quantity
+            if (quantity === "0"){
+                let check = confirm("Are you sure you want to remove this item from your shopping cart?")
+                if (check == true){
+                    try{
+                        let res = await fetch("/deleteItem", {
+                            method: "DELETE",
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                            "itemName" : itemName,
+                            })
+                        })
+        
+        
+                    } catch(err){
+                        console.log(err)
+                    }
+                }
+                window.location.reload(true)
+            
+            }else{
+                try{
+                    const res = await fetch ("/updateItem", {
+                        method: "PUT",
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            "itemName" : itemName,
+                            "itemQty" : quantity
+                        })
                     })
-                })
-                location.assign("/cart")
+                    location.assign("/cart")
+                }
+                catch(err){
+                    console.log(err)
+                }
             }
-            catch(err){
-                console.log(err)
-            }
+            
         }
     }
 
