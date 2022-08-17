@@ -7,7 +7,6 @@ const ejs = require ('ejs');
 const ItemsList = require('./models/ItemsList');
 const CartsList = require('./models/CartsList');
 const { response } = require('express');
-const { Decimal128 } = require('mongodb');
 const PORT = 4444; 
 require('dotenv').config(); 
 
