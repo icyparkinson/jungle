@@ -60,25 +60,28 @@ if (document.querySelector("#item")){
     //ADD TO CART FROM ITEMS PAGE
     async function addCart(){
         let quantity = document.getElementById("quantity").value
-        try{
-            const res = await fetch ("/addItem", {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    "itemName" : item,
-                    "itemCount" : quantity,
-                    "itemPrice" : price,
-                    "itemPic" : img,
-                    "itemPage" : page
+        if (quantity !== "0"){
+            try{
+                const res = await fetch ("/addItem", {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        "itemName" : item,
+                        "itemCount" : quantity,
+                        "itemPrice" : price,
+                        "itemPic" : img,
+                        "itemPage" : page
+                    })
                 })
-            })
-            console.log(item, price)
-            location.assign("/cart")
-
+                console.log(item, price)
+                location.assign("/cart")
+    
+            }
+            catch(err){
+                console.log(err)
+            }
         }
-        catch(err){
-            console.log(err)
-        }
+        
     }
 
     //UPDATE CART FROM ITEMS PAGE
