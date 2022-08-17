@@ -16,6 +16,7 @@
     <li>Better understanding of EJS</li>
     <li>Better understanding of Mongoose schemas</li>
     <li>Better understanding of APIs and CRUD</li>
+    <li>How to use datalists to create autocomplete effect</li>
    </ul>
 
 <h2>Package Dependencies</h2>
@@ -23,7 +24,6 @@ cors, dotenv, ejs, express, heroku, mongodb, mongoose
 
 <h2>Future Update Plans:</h2>
     <ul>
-        <li>Make functioning search bar</li>
         <li>Delete item from shopping cart when quantity drops to 0</li>
         <li>Include status update at top of shopping cart when items are added/removed/edited</li>
         <li>Implement login capability</li>
