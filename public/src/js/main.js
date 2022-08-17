@@ -50,14 +50,14 @@ if (document.querySelector("#item")){
 
     let item = document.querySelector("#item").innerText
     let price = document.querySelector(".dealPrice").innerText.split("$")[1]
-
-    document.querySelector(".addToCart").addEventListener("click", addCart)
-    document.querySelector(".updateCart").addEventListener("click", updateCart)
     let img = document.querySelector(".bigPic").src
     let page = window.location.href
 
-    console.log()
+    document.querySelector(".addToCart").addEventListener("click", addCart)
+    document.querySelector(".updateCart").addEventListener("click", updateCart)
+    
 
+    //ADD TO CART FROM ITEMS PAGE
     async function addCart(){
         let quantity = document.getElementById("quantity").value
         try{
@@ -81,58 +81,66 @@ if (document.querySelector("#item")){
         }
     }
 
+    //UPDATE CART FROM ITEMS PAGE
+    let startQty = document.getElementById("quantity").value
     async function updateCart(){
         let quantity = document.getElementById("quantity").value
-        try{
-            const res = await fetch ("/updateItem", {
-                method: "PUT",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    "itemName" : item,
-                    "itemQty" : quantity
+        if (startQty !== quantity){
+            try{
+                const res = await fetch ("/updateItem", {
+                    method: "PUT",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        "itemName" : item,
+                        "itemQty" : quantity
+                    })
                 })
-            })
-            location.assign("/cart")
-
+                location.assign("/cart")
+    
+            }
+            catch(err){
+                console.log(err)
+            }
+            console.log("clicked!")
         }
-        catch(err){
-            console.log(err)
-        }
-        console.log("clicked!")
     }
-
 }
     
 
 //Another if statement to hold another set of instructions
-//UPDATE QUANTITY FOR CARTS PAGE
+
+
 if (document.querySelectorAll(".upCart")){
     let allButtons = document.querySelectorAll(".upCart")
     for (let button of allButtons){
         button.addEventListener("click", upCart)
     }
 
+    //UPDATE QUANTITY FOR CARTS PAGE
+    let startQty = document.querySelector("#quantity").value
     async function upCart(){
         let itemName = this.parentNode.childNodes[1].innerText
         let quantity = this.parentNode.childNodes[3].firstElementChild.value
 
-        try{
-            const res = await fetch ("/updateItem", {
-                method: "PUT",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    "itemName" : itemName,
-                    "itemQty" : quantity
+        if (startQty !== quantity){
+            try{
+                const res = await fetch ("/updateItem", {
+                    method: "PUT",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        "itemName" : itemName,
+                        "itemQty" : quantity
+                    })
                 })
-            })
-            location.assign("/cart")
-        }
-        catch(err){
-            console.log(err)
+                location.assign("/cart")
+            }
+            catch(err){
+                console.log(err)
+            }
         }
     }
 
-    //DELETE ONE ITEM
+    //DELETE ONE ITEM ON CARTS PAGE
     let allDelete = document.querySelectorAll(".delete")
     for (let del of allDelete){
         del.addEventListener("click", deleteItem)
@@ -161,7 +169,7 @@ if (document.querySelectorAll(".upCart")){
 
     }
 
-    //EMPTY CART
+    //EMPTY CART ON CARTS PAGE
     if (document.querySelector(".emptyCart")){
         document.querySelector(".emptyCart").addEventListener("click", deleteAllItems)
 
