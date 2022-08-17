@@ -6,6 +6,7 @@ const router = express.Router()
 //HOMEPAGE
 router.get('/', async (req, res) =>{
     let clowns = await ItemsList.find()
+    // let cart = await CartsList.countDocuments() <-- turns out, I don't need this
     let groupStage = { $group: { 
       _id: null, 
       total: { 

@@ -44,6 +44,7 @@ router.put('/updateItem', async (req, res) => {
   // DELETING ITEM IN CART
 router.delete('/deleteItem', async(req, res) => {
     try{
+        console.log("delete?")
       await CartsList.findOneAndDelete({
         itemName: req.body.itemName
       })
