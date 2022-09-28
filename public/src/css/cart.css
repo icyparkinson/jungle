@@ -15,23 +15,29 @@ span{
     border: 5px solid gray;
     display: flex;
     margin-bottom: 40px;
-    width: 100%;
+    min-width: 500px;
     padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .imgSide{
-    /* border: 1px solid orange; */
     width: 30%; 
 }
 
 .descSide{
-    /* border: 3px solid purple; */
-    margin-left: 40px;
     font-size: 2rem;
-    width: 100%;
+    width: 70%;
+    min-width: 500px;
+    padding: 10px;
+}
+
+.innerDesc{
+    display: flex;
+    justify-content: space-between;
 }
 
 .checkoutSide{
-    padding: 20px;
+    padding: 10px;
 }
 
 h1{
@@ -78,10 +84,6 @@ button:hover{
 .delete:hover{
     cursor: pointer;
     text-decoration: underline;
-}
-
-.priceSpan{
-    margin-left: 200px;
 }
 
 .disclaimer{

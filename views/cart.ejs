@@ -30,17 +30,25 @@
                 <section class = "cartSide">
             <% for (let item of currentCart){ %>
                 <section class = "liContainer">
+
                     <section class = "imgSide">
                         <a href =" <%= item.itemPage %> "><img src = "<%= item.itemPic %>" class = "cartImg"></a>
                     </section>
+
+                
                     <section class = "descSide">
                         <h2><%= item.itemName %></h2>
-                    
-                        <p>Quantity: <input id = "quantity" type = "number" min = 1 value = <%= item.itemCount %> >
-                            <span class = "priceSpan">Price: <%= item.itemPrice %> each</span></p>
+                        
+                        <div class = "innerDesc">
+                            <span>Quantity: <input id = "quantity" type = "number" min = 1 value = <%= item.itemCount %> ></span>
+                            <span class = "priceSpan">Price: <%= item.itemPrice %> each</span>
+                        </div>
+
                         <button class = "upCart">Update Quantity</button>
+
                         <span class = "delete">Delete Item</span>
                     </section>
+
                 </section>
                 <% subtotal += (item.itemCount * item.itemPrice)%>
             <% } %> 
