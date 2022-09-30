@@ -1,0 +1,15 @@
+<nav>
+    <ul>
+        <li class = "title"><a href="/">Jungle</a></li>
+        <li class = "destination">Deliver to YOU</li>
+        <li>
+            <input type = "text" class = "search" placeholder = "Search bar" list = "itemList" autocomplete="off">
+            <datalist id = "itemList">
+                <option>Toy</option>
+                <option>Watch</option>
+                <option>Food</option>
+                <option>Clothes</option>
+            </datalist>
+        <li><a href = "/cart">Shopping Cart ( <%= shoppingCart === undefined ? 0 : shoppingCart %> )</a></li>
+    </ul>
+</nav>

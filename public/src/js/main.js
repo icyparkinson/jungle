@@ -3,14 +3,12 @@
 let searchBtn = document.querySelector(".searchBtn")
 let searchBar = document.querySelector(".search")
 let dest = ""
-// let mag = document.querySelector("svg")
 
 window.onload = function() {
     searchBar.value = '';
     }
 
 searchBar.addEventListener("keyup", loadPage)
-// mag.addEventListener("click", loadPage)
 
 
 function loadPage(e){

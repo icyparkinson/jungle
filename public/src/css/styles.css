@@ -20,6 +20,8 @@
 
 
   nav{
+    display: flex;
+    justify-content: space-between;
     background-color: rgb(20	25	32	);
     color: white;
     height: 60px;
@@ -28,6 +30,7 @@
 
   nav ul{
     background-color: rgb(20	25	32	);
+    width: 100%;
   }
 
   nav li{
@@ -47,10 +50,6 @@
     display: inline;
   }
 
-  .mag{
-      padding: 0px;
-  }
-
   .title a{
       color: goldenrod;
       font-size: 3rem;
@@ -64,14 +63,14 @@
   .bannerSection{
     display: flex;
     justify-content: center;
-    overflow: hidden;
+    overflow: hidden; /*hidden to prevent bottom part of cropped image from showing behind items */
     margin: 20px;
     padding-top: 15px;
   }
 
   #banner{
     width: 1500px;
-    margin-bottom: -275px;
+    margin-bottom: -275px; /*negative to crop bottom part of image */
     border: 1px solid pink;
 
   }
@@ -112,6 +111,22 @@
   }
 
   /******************************************
-  /* ADDITIONAL STYLES
+  /* MEDIA QUERIES
   /*******************************************/
   
+
+  @media screen and (max-width: 1200px){
+    .destination{
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 900px){
+    nav{
+      height: 80px;
+    }
+
+    nav ul{
+      padding-left: 10px;
+    }
+  }
