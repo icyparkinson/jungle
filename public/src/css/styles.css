@@ -61,16 +61,19 @@
       width: 50%;
   }
 
-  .carousel{
-      border: 1px solid pink;
-      width: 100%;
-      height: 300px;
-      margin: 50px auto;
-      background-image: url("../css/images/carousel2.jpg");
-      background-size: cover;
-      /* background-attac9oohment: fixed; */
-      background-position: top;
-      background-repeat: no-repeat;
+  .bannerSection{
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    margin: 20px;
+    padding-top: 15px;
+  }
+
+  #banner{
+    width: 1500px;
+    margin-bottom: -275px;
+    border: 1px solid pink;
+
   }
   
   .container{
