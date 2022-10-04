@@ -48,7 +48,7 @@
 
             <p>FREE delivery overnight if you spend $25 on qualifying items.</p>
 
-            <input id = "quantity" type ="number" placeholder = 0 min = 1 value = <%= cartItem.length > 0 ? cartItem[0].itemCount : 1 %>>
+            <input id = "quantity" type ="number" placeholder = 0 min = 0 value = <%= cartItem.length > 0 ? cartItem[0].itemCount : 1 %>>
 
             <button class = "<% if (cartItem.length === 0){ %> hidden <%} %>"><span class = "updateCart" >Update Cart</span></button>
             <button class = "addToCart <% if (cartItem.length > 0){ %> hidden <%} %>">Add to Cart</button>
