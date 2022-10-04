@@ -138,11 +138,13 @@ if (document.querySelectorAll(".upCart")){
     //UPDATE QUANTITY FOR CARTS PAGE
     let startQty = document.querySelector("#quantity").value
     async function upCart(){
-        let itemName = this.parentNode.childNodes[1].innerText
-        let quantity = this.parentNode.childNodes[3].firstElementChild.value
+        let itemName = this.parentElement.firstElementChild.innerText
+        let quantityVal = quantity.value
 
-        if (startQty !== quantity){
-            if (quantity === "0"){
+        console.log(this.parentElement.firstElementChild.innerText)
+
+        if (startQty !== quantityVal){
+            if (quantityVal === "0"){
                 let check = confirm("Are you sure you want to remove this item from your shopping cart?")
                 if (check == true){
                     try{
@@ -168,7 +170,7 @@ if (document.querySelectorAll(".upCart")){
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             "itemName" : itemName,
-                            "itemQty" : quantity
+                            "itemQty" : quantityVal
                         })
                     })
                     location.assign("/cart")
