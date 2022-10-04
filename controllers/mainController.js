@@ -21,8 +21,6 @@ const homePage = async (req, res) => {
       baloons: clowns, //What follows the colon is the actual database array. What precedes the colon is the variable used by EJS.
       shoppingCart: cartNum
     })
-    console.log("hi")
-    console.log(cartCount)
 }
 
 //ANY ITEM PAGE

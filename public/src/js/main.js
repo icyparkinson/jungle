@@ -126,10 +126,17 @@ if (document.querySelector("#item")){
 }
     
 
+//CARTS PAGE
+
 //Another if statement to hold another set of instructions
 
 
+
+
 if (document.querySelectorAll(".upCart")){
+
+    let itemName = document.querySelector(".itemH2").innerText
+
     let allButtons = document.querySelectorAll(".upCart")
     for (let button of allButtons){
         button.addEventListener("click", upCart)
@@ -138,12 +145,12 @@ if (document.querySelectorAll(".upCart")){
     //UPDATE QUANTITY FOR CARTS PAGE
     let startQty = document.querySelector("#quantity").value
     async function upCart(){
-        let itemName = this.parentElement.firstElementChild.innerText
+        //quantityVal grabs the value in the input field
         let quantityVal = quantity.value
 
-        console.log(this.parentElement.firstElementChild.innerText)
-
+        //only trigger if the user actually changes the value from whatever the page loaded on (original qty in cart)
         if (startQty !== quantityVal){
+            //if the new number is 0, prompt user to delete the item completely and then refresh the page
             if (quantityVal === "0"){
                 let check = confirm("Are you sure you want to remove this item from your shopping cart?")
                 if (check == true){
@@ -163,6 +170,7 @@ if (document.querySelectorAll(".upCart")){
                 }
                 window.location.reload(true)
             
+            //if the new number is any other value, we will just update the qty of this item and refresh the page
             }else{
                 try{
                     const res = await fetch ("/updateItem", {
@@ -191,7 +199,6 @@ if (document.querySelectorAll(".upCart")){
 
     async function deleteItem(){
 
-        let itemName = this.parentNode.childNodes[1].innerText
         let check = confirm("Are you sure you want to remove this item from your shopping cart?")
         if (check == true){
             try{
@@ -217,7 +224,6 @@ if (document.querySelectorAll(".upCart")){
         document.querySelector(".emptyCart").addEventListener("click", deleteAllItems)
 
         async function deleteAllItems(){
-            let itemName = this.parentNode.childNodes[1].innerText
             let check = confirm("Are you sure you want to empty your shopping cart?")
             if (check == true){
                 try{
