@@ -13,8 +13,9 @@ let groupStage = { $group: {
 const homePage = async (req, res) => {
     let clowns = await ItemsList.find()
     
+    //cartCount returns an array with an object inside with 2 properties: id and total)
     let cartCount = await CartsList.aggregate([groupStage]) //This aggregate function is from MongoDB and lets you sum everything up from one query type
-    let cartNum = (cartCount.map(a => a.total))[0] //have to use Map to get the number out of the object inside an array
+    let cartNum = (cartCount[0].total) //get the first and only element of the array, then only get the total number of the object
   
     res.render('index', {
       baloons: clowns, //What follows the colon is the actual database array. What precedes the colon is the variable used by EJS.
@@ -28,7 +29,7 @@ const itemPage = async(req, res) => {
     let foundItem = await ItemsList.findById(id)
   
   let cartCount = await CartsList.aggregate([groupStage])
-    let cartNum = (cartCount.map(a => a.total))[0]
+  let cartNum = (cartCount[0].total)
   
     await CartsList.find({"itemName" : foundItem.itemName}) === undefined ? inCart = [] : inCart = await CartsList.find({"itemName" : foundItem.itemName})
     
@@ -42,7 +43,7 @@ const itemPage = async(req, res) => {
 // NOT FOUND PAGE
 const notFound = async(req,res) =>{
     let cartCount = await CartsList.aggregate([groupStage])
-    let cartNum = (cartCount.map(a => a.total))[0] 
+    let cartNum = (cartCount[0].total) 
   
       res.render('nothing', {
         shoppingCart: cartNum
@@ -54,7 +55,7 @@ const shoppingCart = async(req,res) => {
     let cart = await CartsList.find()
   
     let cartCount = await CartsList.aggregate([groupStage])
-    let cartNum = (cartCount.map(a => a.total))[0]
+    let cartNum = (cartCount[0].total)
   
   
     res.render('cart', {

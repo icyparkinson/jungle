@@ -1,4 +1,3 @@
-const ItemsList = require('../models/ItemsList');
 const CartsList = require('../models/CartsList');
 
 //ADDING ITEM TO CART
@@ -42,7 +41,6 @@ const updateItem = async (req, res) => {
 //DELETING ITEM IN CART
 const deleteItem = async (req, res) =>{
     try{
-        console.log("delete?")
       await CartsList.findOneAndDelete({
         itemName: req.body.itemName
       })

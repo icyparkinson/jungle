@@ -71,7 +71,6 @@ if (document.querySelector("#item")){
                         "itemPage" : page
                     })
                 })
-                console.log(item, price)
                 location.assign("/cart")
     
             }
@@ -122,8 +121,6 @@ if (document.querySelector("#item")){
                     console.log(err)
                 }
             }
-           
-            console.log("clicked!")
         }
     }
 }
@@ -218,7 +215,6 @@ if (document.querySelectorAll(".upCart")){
         document.querySelector(".emptyCart").addEventListener("click", deleteAllItems)
 
         async function deleteAllItems(){
-            console.log("delete all items")
             let itemName = this.parentNode.childNodes[1].innerText
             let check = confirm("Are you sure you want to empty your shopping cart?")
             if (check == true){
